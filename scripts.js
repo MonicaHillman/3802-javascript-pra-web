@@ -47,6 +47,44 @@ tagsList.addEventListener('click', (event) => {
     }
 });
 
+// Lista de tags disponíveis (simulação)
+const availableTags = ['Front-end', 'Back-end', 'Full-stack', 'JavaScript', 'HTML', 'CSS', 'React', 'Node.js', 'Express', 'MongoDB', 'SQL'];
+
+// Função assíncrona para verificar se uma tag já existe na lista de tags disponíveis
+async function tagExistsAsync(tagText) {
+    return new Promise((resolve) => {
+        // Simula uma operação assíncrona de busca em uma lista de tags disponíveis
+        setTimeout(() => {
+            resolve(availableTags.includes(tagText));
+        }, 1000); // Simula um tempo de resposta de 1 segundo
+    });
+}
+
+// Adicionar nova tag
+tagsInput.addEventListener('keypress', async (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        const tagText = tagsInput.value.trim();
+        if (tagText !== '') {
+            try {
+                const tagExists = await tagExistsAsync(tagText);
+                if (tagExists) {
+                    const newTag = document.createElement('li');
+                    newTag.innerHTML = `<p>${tagText}</p><img src="./img/close-black.svg" class="remove-tag">`;
+                    tagsList.appendChild(newTag);
+                    tagsInput.value = '';
+                } else {
+                    alert('Tag não encontrada. Por favor, insira uma tag válida.');
+                }
+            } catch (error) {
+                console.error('Erro ao verificar a existência da tag:', error);
+                alert('Erro ao verificar a existência da tag. Verifique o console para mais detalhes.');
+            }
+        }
+    }
+});
+
+
 // Limpar formulário
 document.querySelector('.botao-descartar').addEventListener('click', (event) => {
     event.preventDefault();
