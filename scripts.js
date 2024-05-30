@@ -47,14 +47,6 @@ tagsList.addEventListener('click', (event) => {
     }
 });
 
-// Limpar formulário
-document.querySelector('.botao-descartar').addEventListener('click', (event) => {
-    event.preventDefault();
-    form.reset();
-    mainImage.src = './img/imagem1.png'; // Restaurar imagem padrão
-    imageName.textContent = 'image_projeto.png'; // Restaurar nome padrão da imagem
-    tagsList.innerHTML = ''; // Limpar lista de tags
-});
 
 // Evento para botão de publicar
 document.querySelector('.botao-publicar').addEventListener('click', async (event) => {
@@ -63,15 +55,10 @@ document.querySelector('.botao-publicar').addEventListener('click', async (event
     const descricaoProjeto = document.getElementById('descricao').value;
     const tagsProjeto = Array.from(tagsList.querySelectorAll('p')).map(tag => tag.textContent);
 
-    // Simular uma mensagem de sucesso (substitua por sua lógica real)
-    try {
-        const result = await publicarProjeto(nomeProjeto, descricaoProjeto, tagsProjeto);
-        console.log(result);
-        alert('Projeto publicado com sucesso!');
-    } catch (error) {
-        console.error('Erro ao publicar projeto:', error);
-        alert('Erro ao publicar projeto. Verifique o console para mais detalhes.');
-    }
+    console.log("nomeProjeto", nomeProjeto);
+    console.log("descricaoProjeto", descricaoProjeto);
+    console.log("tagsProjeto", tagsProjeto);
+
 });
 
 // Função para ler o conteúdo do arquivo
@@ -83,21 +70,5 @@ function readFileContent(file) {
         };
         reader.onerror = () => reject(`Erro na leitura do arquivo ${file.name}`);
         reader.readAsDataURL(file);
-    });
-}
-
-// Função para publicar o projeto (simulada)
-function publicarProjeto(nomeProjeto, descricaoProjeto, tagsProjeto) {
-    return new Promise((resolve, reject) => {
-        // Simular uma requisição assíncrona, por exemplo, para uma API
-        setTimeout(() => {
-            // Simular sucesso ou erro aleatoriamente
-            const isSuccess = Math.random() > 0.5;
-            if (isSuccess) {
-                resolve('Projeto publicado com sucesso!');
-            } else {
-                reject('Erro ao publicar projeto. Tente novamente mais tarde.');
-            }
-        }, 2000); // Simular um tempo de espera de 2 segundos
     });
 }
