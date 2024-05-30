@@ -82,18 +82,41 @@ textarea {
     height: 161px;
 }
 
-.lista-tags li {
-    display: flex;
-    background-color: var(--secondary-color);
-    color: var(--background-color);
-    align-items: center;
-    gap: 10px;
-    padding: 4px 8px;
-    border-radius: 4px;
+/* Adicione isso ao seu styles.css */
+#tags-input {
+    padding: 0.5em;
+    margin-top: 1em;
+}
+
+#upload-btn {
+    cursor: pointer;
 }
 
 .lista-tags {
+
     display: flex;
+    gap: 24px;
+}
+
+.lista-tags li {
+    display: flex;
+    align-items: center;
+    background: var(--secondary-color);
+    color: var(--background-color);
+    border-radius: 5px;
+    padding: 0.5em;
+    margin: 0.5em 0;
+
+    width: fit-content;
+}
+
+.lista-tags li p {
+    margin: 0;
+    padding-right: 0.5em;
+}
+
+.lista-tags li img {
+    cursor: pointer;
 }
 
 .container-descricao {
