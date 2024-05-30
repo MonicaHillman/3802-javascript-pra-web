@@ -24,24 +24,15 @@ imageUpload.addEventListener('change', async (event) => {
     }
 });
 
-// Adicionar nova tag
-tagsInput.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
-        event.preventDefault();
-        const tagText = tagsInput.value.trim();
-        if (tagText !== '') {
-            const newTag = document.createElement('li');
-            newTag.innerHTML = `<p>${tagText}</p><img src="./img/close-black.svg" class="remove-tag">`;
-            tagsList.appendChild(newTag);
-            tagsInput.value = '';
-        }
-    }
-});
 
-// Remover tag
-tagsList.addEventListener('click', (event) => {
-    if (event.target.classList.contains('remove-tag')) {
-        const tagToRemove = event.target.parentElement;
-        tagsList.removeChild(tagToRemove);
-    }
-});
+// Função para ler o conteúdo do arquivo
+function readFileContent(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            resolve({ url: reader.result, name: file.name });
+        };
+        reader.onerror = () => reject(`Erro na leitura do arquivo ${file.name}`);
+        reader.readAsDataURL(file);
+    });
+}
